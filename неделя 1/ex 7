@@ -1,0 +1,34 @@
+f=open('input.txt', 'r')
+f1=open('output.txt', 'w')
+x=f.readline().split()
+y=f.readline()
+z=f.readline()
+z=int(z)
+s=0
+def tr_sys1(N, b):
+    q=0
+    k=0
+    for i in range(len(N)-1, -1, -1):
+        q+=int(N[i]) * (b ** k)
+        k+=1
+    return q
+def tr_sys2(N, c):
+    l=""
+    while N>0:
+        l+=str(N%c)
+        N=N//c
+    l=l[::-1]
+    return l 
+if y=="+":
+    for i in range(len(x)):
+        s+=tr_sys1(int(x[i]), z)
+elif y=="-":
+    for i in range(len(x)):
+        s-=tr_sys1(int(x[i]), z)
+elif y=="*":
+    s+=1
+    for i in range(len(x)):
+        s*=tr_sys1(int(x[i]), z)
+ans=tr_sys2(s, z)
+f1.write(str(ans))
+f1.close()
